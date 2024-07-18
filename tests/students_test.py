@@ -37,6 +37,9 @@ def test_post_assignment_null_content(client, h_student_1):
         })
 
     assert response.status_code == 400
+    error_response = response.json
+    assert error_response['error'] == 'ValidationError'
+    assert 'Content cannot be null' in error_response['message']
 
 
 def test_post_assignment_student_1(client, h_student_1):
